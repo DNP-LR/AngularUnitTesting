@@ -13,4 +13,14 @@ describe('CalculatorService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should add two numbers', () =>{
+    let result = service.add(2,2);
+    expect(result).toBe(4);
+  });
+  it('should subtract two numbers', () =>{
+    let result = service.subtract(2, 2);
+    expect(result).toBe(0)
+  });
+
 });

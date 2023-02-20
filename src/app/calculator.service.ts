@@ -5,15 +5,15 @@ import {Injectable} from '@angular/core';
 })
 export class CalculatorService {
 
-  // constructor() { }
+  constructor() { }
 
-  // add(n1: number, n2: number) {
-  //   let result = n1 + n2;
-  //   return result;
-  // }
-  //
-  // subtract(n1: number, n2: number) {
-  //   let result = n1 - n2
-  //   return result;
-  // }
+  add(n1: number, n2: number) {
+    let result = n1 + n2;
+    return result;
+  }
+
+  subtract(n1: number, n2: number) {
+    let result = n1 - n2
+    return result;
+  }
 }
