@@ -7,8 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class PostService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor (private http : HttpClient) { }
 
   getPost() {
     return this.http.get<Post[]>(`https://jsonplaceholder.typicode.com/post`)

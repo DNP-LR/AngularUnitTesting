@@ -10,9 +10,7 @@ import {PostService} from "../service/post.service";
 export class PostComponent implements OnInit {
   post: Post [] = []
 
-  constructor(private postService: PostService) {
-  }
-
+  constructor(private postService: PostService) { }
 
   ngOnInit(): void {
     this.getPost();
@@ -28,8 +26,6 @@ export class PostComponent implements OnInit {
   delete(post: Post) {
     this.post = this.post.filter((post) => post.id !== post.id);
     this.postService.deletePost(post)
-      .subscribe((post) => {
-
-      });
+      .subscribe();
   }
 }
