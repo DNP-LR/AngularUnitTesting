@@ -11,7 +11,7 @@ export class StrengthPipe implements PipeTransform {
     } else if (value >= 10 && value < 20) {
       return value + '(strong)';
     } else {
-      return value + '(strongest`)';
+      return value + '(strongest)';
     }
   }
 }
