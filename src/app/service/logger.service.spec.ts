@@ -20,7 +20,7 @@ describe('LoggerService', () => {
     expect(count).toBe(0);
   });
 
-  it('should add th message when log is called', () =>{
+  it('should add the message when log is called', () =>{
     service.log('message');
     expect(service.message.length).toBe(1);
   });

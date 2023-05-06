@@ -2,67 +2,74 @@ import {ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {PostComponent} from './post.component';
 import {Post} from "../models/Post";
-import {of} from "rxjs";
+import {first} from "rxjs";
+import {NO_ERRORS_SCHEMA} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {By} from "@angular/platform-browser";
+
 
 describe('PostComponent', () => {
-  let component: PostComponent;
+
   let fixture: ComponentFixture<PostComponent>;
-  let mockPostService : any;
-  let postVariable: Post[];
+  let comp: PostComponent;
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PostComponent]
+      declarations: [PostComponent],
+      schemas: [NO_ERRORS_SCHEMA],
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(PostComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-
-    // postVariable = [
-    //   {
-    //     id: 1,
-    //     body: 'test 1',
-    //     title: 'title 1'
-    //   }, {
-    //     id: 2,
-    //     body: 'test 2',
-    //     title: 'title 2'
-    //   }, {
-    //     id: 3,
-    //     body: 'test 3',
-    //     title: 'title 3'
-    //   },
-    // ];
-    // mockPostService = jasmine.createSpyObj(['getPost', 'deletePost']);
-    // component = new PostComponent(mockPostService);
+    comp = fixture.componentInstance;
   });
 
-  // describe('delete',  ()=> {
-  //   beforeEach(() =>{
-  //     mockPostService.deletePost.and.returnValue(of(true));
-  //     component.post = postVariable;
-  //   });
+  it('should create post component using TestBed', function () {
+    expect(comp).toBeDefined();
+  });
+  it('should render the post title in the anchor element', function () {
+    const post: Post = {
+      id: 1, body: 'body 1', title: 'title1'
+    };
+    comp.post = post;
+    fixture.detectChanges();
+    const postElement: HTMLElement = fixture.nativeElement;
+    const a = postElement.querySelector('a');
+    expect(a?.textContent).toContain(post.title);
+  });
+
+
+  it('should render the post title in the anchor element using debug element', function () {
+    const post: Post = {
+      id: 1, body: 'body 1', title: 'title1'
+    };
+    comp.post = post;
+    fixture.detectChanges();
+    const postDebugElement = fixture.debugElement;
+    const aElement: HTMLElement = postDebugElement.query(
+      By.css('a')).nativeElement;
+    expect(aElement.textContent).toContain(post.title);
+  });
+
+  it('should raise an event when the delete post ios clicked', function () {
+    const post: Post = {
+      id: 1, body: 'body 1', title: 'title1'
+    };
+    comp.post = post;
+    comp.delete.pipe(first()).subscribe((selectedPost) => {
+      expect(selectedPost).toEqual(post);
+    });
+    comp.onDeletePost(new MouseEvent('click'));
+  });
+
+  // it('should raise an event when delete post is clicked', function () {
+  //   const comp = new PostComponent();
   //
-  //   it('should delete the selected Post from the post', () => {
-  //     component.delete(postVariable[1]);
-  //     expect(component.post.length).toBe(2);
-  //   });
+  //   const post: Post = {id: 1, body: 'body 1 ', title: 'titletesting'};
   //
-  //   it('should delete the actual selected Post in Post', () => {
-  //     component.delete(postVariable[1]);
-  //     for(let post of component.post){
-  //       expect(post).not.toEqual(postVariable[1]);
-  //     }
+  //   comp.delete.pipe(first()).subscribe((selectedPost) => {
+  //     expect(selectedPost).toEqual(post);
   //   });
-  //
-  //   it('should call the delete Post from the post only once', () => {
-  //     component.delete(postVariable[1]);
-  //     expect(mockPostService.delete).toHaveBeenCalledTimes(1);
-  //   });
+  //   comp.onDeletePost(new MouseEvent('click'));
   // });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

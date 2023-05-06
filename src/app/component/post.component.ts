@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Post} from "../models/Post";
-import {PostService} from "../service/post.service";
 
 @Component({
   selector: 'app-post',
@@ -8,24 +7,21 @@ import {PostService} from "../service/post.service";
   styleUrls: ['./post.component.css']
 })
 export class PostComponent implements OnInit {
-  post: Post [] = []
 
-  constructor(private postService: PostService) { }
+
+  @Input() post !: Post;
+  @Output() delete = new EventEmitter<Post>();
+
+  constructor() {
+  }
 
   ngOnInit(): void {
-    this.getPost();
   }
 
-  getPost() {
-    this.postService.getPost()
-      .subscribe((post) => {
-        this.post = post;
-      });
+
+  onDeletePost(event: Event): void {
+    event.stopPropagation();
+    this.delete.emit(this.post);
   }
 
-  delete(post: Post) {
-    this.post = this.post.filter((post) => post.id !== post.id);
-    this.postService.deletePost(post)
-      .subscribe();
-  }
 }
