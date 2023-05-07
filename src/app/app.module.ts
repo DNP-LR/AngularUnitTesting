@@ -8,6 +8,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { PostsComponent } from './component/posts.component';
 import {RouterModule} from "@angular/router";
 import { PostDetailComponent } from './component/post-detail.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,11 +18,12 @@ import { PostDetailComponent } from './component/post-detail.component';
     PostsComponent,
     PostDetailComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    RouterModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        RouterModule,
+        FormsModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

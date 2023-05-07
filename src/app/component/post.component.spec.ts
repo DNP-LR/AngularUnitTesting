@@ -61,15 +61,4 @@ describe('PostComponent', () => {
     comp.onDeletePost(new MouseEvent('click'));
   });
 
-  // it('should raise an event when delete post is clicked', function () {
-  //   const comp = new PostComponent();
-  //
-  //   const post: Post = {id: 1, body: 'body 1 ', title: 'titletesting'};
-  //
-  //   comp.delete.pipe(first()).subscribe((selectedPost) => {
-  //     expect(selectedPost).toEqual(post);
-  //   });
-  //   comp.onDeletePost(new MouseEvent('click'));
-  // });
-
 });

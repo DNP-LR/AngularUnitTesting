@@ -3,9 +3,12 @@ import {TestBed} from '@angular/core/testing';
 import {PostService} from './post.service';
 import {HttpClient} from "@angular/common/http";
 import {of} from "rxjs";
+import {HttpTestingController} from "@angular/common/http/testing";
 
 describe('PostService', () => {
   let service: PostService;
+  let postService: PostService;
+  let httpTestingController : HttpTestingController;
   let httpClientSpy: jasmine.SpyObj<HttpClient>
 
   let postVariable = [
@@ -40,7 +43,7 @@ describe('PostService', () => {
   describe('getPost()', () => {
     it('should return expected post when getPost is called', (done: DoneFn) => {
       httpClientSpy.get.and.returnValue(of(postVariable));
-      service.getPost().subscribe({
+      service.getPosts().subscribe({
         next: (post) => {
           expect(post).toEqual(postVariable);
           done();

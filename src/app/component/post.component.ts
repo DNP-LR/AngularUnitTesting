@@ -8,7 +8,6 @@ import {Post} from "../models/Post";
 })
 export class PostComponent implements OnInit {
 
-
   @Input() post !: Post;
   @Output() delete = new EventEmitter<Post>();
 
@@ -17,8 +16,6 @@ export class PostComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
   onDeletePost(event: Event): void {
     event.stopPropagation();
     this.delete.emit(this.post);
